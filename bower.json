@@ -1,0 +1,27 @@
+{
+  "name": "ember-json-mapper",
+  "version": "0.0.1",
+  "keywords": [
+    "json",
+    "mapper"
+  ],
+  "main": "main-json-mapper.js",
+  "authors": [
+    "Oleg Nechiporenko"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ember": ">=1.5.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "app/bower_components"
+  ],
+  "devDependencies": {
+    "ember-mocha-adapter": "0.1.2"
+  }
+}
