@@ -70,7 +70,7 @@
           _v = _v.map(function(_sub_v) {
             var _map = get(_k, 'map');
             if (isNone(_map)) return _sub_v;
-            return mapper(_sub_v, _k['map']);
+            return mapper(_sub_v, _map);
           });
         }
         setPath(mapped, key, _v);
