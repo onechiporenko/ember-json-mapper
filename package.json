@@ -14,14 +14,10 @@
   "dependencies": {
     "ember": ">=1.5.0"
   },
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "app/bower_components"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onechiporenko/ember-json-mapper.git"
+  },
   "devDependencies": {
     "ember-mocha-adapter": "0.1.2"
   }

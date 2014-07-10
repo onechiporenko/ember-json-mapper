@@ -194,6 +194,14 @@
         expect(ret).to.eql(expected);
       });
 
+      it('Should set `key` with sub-objects (5)', function () {
+        var map = { a: 'a', 'd.e': { key: 'b.c' }, 'd.f': 'b.z' },
+          source = { a: 1, b: { c: 2, z: 3 } },
+          expected = { a: 1, d: { e: 2, f: 3 } },
+          ret = Ember.JsonMapper.map(source, map);
+        expect(ret).to.eql(expected);
+      });
+
       it('Should trigger error if some `key`-parts are invalid', function () {
         var map = { a: 'a', 'd...e': { key: 'b' } },
           source = { a: 1, b: 2 };
