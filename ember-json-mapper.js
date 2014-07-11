@@ -55,11 +55,12 @@
   }
 
   JsonMapper.map = function mapper(source, map) {
-    var mapped = {},
-      k = keys(map);
 
     if(!isObject(source)) assert('`source` should be an object', false);
     if(!isObject(map)) assert('`map` should be an object', false);
+
+    var mapped = {},
+      k = keys(map);
 
     k.forEach(function(key) {
       var _k = map[key],
