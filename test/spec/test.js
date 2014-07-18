@@ -244,6 +244,20 @@
 
     });
 
+    describe('`custom`-tests', function () {
+
+      it('Should use `custom`', function () {
+        var map = { a: 'a', 'b': { custom: function (source) {
+            return Ember.get(source, 'b.c') + 1;
+          } } },
+          source = { a: 1, b: { c: 2 } },
+          expected = { a: 1, b: 3 },
+          ret = Ember.JsonMapper.map(source, map);
+        expect(ret).to.eql(expected);
+      });
+
+    });
+
   });
 
   describe('Array-mapping', function () {
@@ -306,6 +320,30 @@
           ] },
           {c: 2, v: [
             { e1: 5, f1: 6 }
+          ] }
+        ] },
+        ret = Ember.JsonMapper.map(source, map);
+      expect(ret).to.eql(expected);
+    });
+
+    it('`custom` in nested', function () {
+      var map = { a: 'a', d: { key: 'b', map: { c: 'c', v: { key: 'd', map: { e1: 'e', f1: { custom: function(source) {
+          return Ember.get(source, 'f') + 1;
+        } } } } } } },
+        source = { a: 1, b: [
+          {c: 1, d: [
+            { e: 3, f: 4 }
+          ] },
+          {c: 2, d: [
+            { e: 5, f: 6 }
+          ] }
+        ] },
+        expected = { a: 1, d: [
+          {c: 1, v: [
+            { e1: 3, f1: 5 }
+          ] },
+          {c: 2, v: [
+            { e1: 5, f1: 7 }
           ] }
         ] },
         ret = Ember.JsonMapper.map(source, map);

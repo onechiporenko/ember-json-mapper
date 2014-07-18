@@ -22,18 +22,24 @@
   function getFromObject(source, key) {
     var _sub_k = get(key, 'key'),
       _default = get(key, 'default'),
+      _custom_get = get(key, 'custom'),
       _v;
-    assert('`key` or `default` should be defined', !(isNone(_default) && isNone(_sub_k)));
-    if (isNone(_default)) {
-      _v = get(source, _sub_k);
-    }
-    else {
-      if (isNone(_sub_k)) {
-        _v = _default;
+    assert('`key` or `default` should be defined', !(isNone(_custom_get)) || !(isNone(_default) && isNone(_sub_k)));
+    if (isNone(_custom_get)) {
+      if (isNone(_default)) {
+        _v = get(source, _sub_k);
       }
       else {
-        _v = getWithDefaults(source, _sub_k, _default);
+        if (isNone(_sub_k)) {
+          _v = _default;
+        }
+        else {
+          _v = getWithDefaults(source, _sub_k, _default);
+        }
       }
+    }
+    else {
+      _v = _custom_get(source);
     }
     return _v;
   }
