@@ -102,7 +102,7 @@ var mapped = Ember.JsonMapper.map(source, map); // { a: 1, d: [ {c: 1, v: [ { e1
 ````
 
 Custom getter for nested objects
-````
+````javascript
 var map = { a: 'a', d: { key: 'b', map: { c: 'c', v: { key: 'd', map: { e1: 'e', f1: { custom: function(source) {
   return Ember.get(source, 'f') + 1;
 } } } } } } };
