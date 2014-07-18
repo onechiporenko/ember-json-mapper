@@ -97,6 +97,15 @@
 <span class="kd">var</span> <span class="nx">mapped</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">JsonMapper</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span> <span class="c1">// { a: 1, c: 3 }</span>
 </pre></div>
 
+<p>Custom getter</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="o">:</span> <span class="p">{</span> <span class="nx">custom</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="s1">'b.c'</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">mapped</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">JsonMapper</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span> <span class="c1">// { a: 1, b: 3 }</span>
+</pre></div>
+
 <p>Array-properties mapping</p>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">'a'</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">'b'</span><span class="p">,</span> <span class="nx">map</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="s1">'c'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
@@ -127,6 +136,30 @@
   <span class="p">]</span> <span class="p">}</span>
 <span class="p">]</span> <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">mapped</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">JsonMapper</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span> <span class="c1">// { a: 1, d: [ {c: 1, v: [ { e1: 3, f1: 4 } ] }, {c: 2, v: [ { e1: 5, f1: 6 } ] } ] }</span>
+</pre></div>
+
+<p>Custom getter for nested objects</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">'a'</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">'b'</span><span class="p">,</span> <span class="nx">map</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="s1">'c'</span><span class="p">,</span> <span class="nx">v</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">'d'</span><span class="p">,</span> <span class="nx">map</span><span class="o">:</span> <span class="p">{</span> <span class="nx">e1</span><span class="o">:</span> <span class="s1">'e'</span><span class="p">,</span> <span class="nx">f1</span><span class="o">:</span> <span class="p">{</span> <span class="nx">custom</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">e</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">f</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+  <span class="p">]</span> <span class="p">},</span>
+  <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">e</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">f</span><span class="o">:</span> <span class="mi">6</span> <span class="p">}</span>
+  <span class="p">]</span> <span class="p">}</span>
+<span class="p">]</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">expected</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">v</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">e1</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">f1</span><span class="o">:</span> <span class="mi">5</span> <span class="p">}</span>
+  <span class="p">]</span> <span class="p">},</span>
+  <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">v</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">e1</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">f1</span><span class="o">:</span> <span class="mi">7</span> <span class="p">}</span>
+  <span class="p">]</span> <span class="p">}</span>
+<span class="p">]</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">mapped</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">JsonMapper</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span> <span class="c1">// { a: 1, d: [ {c: 1, v: [ { e1: 3, f1: 5 } ] }, {c: 2, v: [ { e1: 5, f1: 7 } ] } ] }</span>
 </pre></div>
       </section>
     </div>
