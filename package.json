@@ -1,9 +1,10 @@
 {
   "name": "ember-json-mapper",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Small mapper for JSONs. It allows you to convert one object to another with minimal effort.",
   "keywords": [
     "json",
+    "ember",
     "mapper"
   ],
   "main": "main-json-mapper.js",
